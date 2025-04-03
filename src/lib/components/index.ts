@@ -1,5 +1,3 @@
-import HoverCardComponent from "./hovercard/hovercard.svelte";
+import ViewPortComponent from "./viewport/viewport.svelte";
 
-export const HoverCard = {
-    root: HoverCardComponent,
-};
+export const Viewport = ViewPortComponent;

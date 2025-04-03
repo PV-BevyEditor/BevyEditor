@@ -1,8 +1,9 @@
-<script>
+<script lang="ts">
     import "../themes.css";
     import "../app.css";
 
-    import { info } from "$lib/scripts/info";
+    import { info, type GizmoItem } from "$lib/scripts/info";
+    import { gizmoOptions } from "$lib/stores/gizmoOptions";
 
     import { Popover, Separator, Tooltip } from "bits-ui";
 
@@ -63,11 +64,15 @@
     <Separator.Root class="h-px bg-[--color-surface-700]" />
     <div class="flex flex-row justify-start gap-3 m-3">
         {#each Object.entries(info.toolbarActions) as [groupName, group], index}
-            <div class="flex flex-row justify-evenly gap-4">
+            <div class="flex flex-row justify-evenly gap-1">
                 {#each group as item}
                     {@const Icon = item.icon}
+                    {@const gizmoProperty = (item as GizmoItem).gizmoProperty} <!-- Had to add this line because TypeScript analyser is wonky >:( -->
 
-                    <button class="flex flex-col items-center" onclick={item.action}>
+                    <button 
+                        class="flex flex-col items-center rounded-lg px-2 py-1.5 {gizmoProperty ? $gizmoOptions[gizmoProperty] ? `bg-[--color-surface-950]` : `` : ``}" 
+                        onclick={item.action}
+                    >
                         <Icon strokeWidth={2} />
                         <p class="text-sm">{item.label}</p>
                     </button>
@@ -78,6 +83,8 @@
             {/if}
         {/each}
     </div>
+
+    {@render children?.()}
 </main>
 
 <style>

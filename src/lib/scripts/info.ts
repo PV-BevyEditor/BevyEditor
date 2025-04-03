@@ -1,3 +1,7 @@
+import { open } from "@tauri-apps/plugin-dialog";
+import { readFile } from "@tauri-apps/plugin-fs";
+import { runner } from "./communication";
+
 import { goto } from "$app/navigation";
 import {
     Pause,
@@ -12,6 +16,14 @@ import {
     Box,
     Image,
 } from "lucide-svelte"
+import { gizmoOptions, type GizmoOptions } from "$lib/stores/gizmoOptions";
+
+export interface GizmoItem {
+    icon: any,
+    action: () => void,
+    label: string,
+    gizmoProperty?: keyof GizmoOptions,
+}
 
 export let info = {
     topTabs: {
@@ -111,23 +123,42 @@ export let info = {
         transforms: [
             {
                 label: `Select`,
+                gizmoProperty: ``,
                 icon: MousePointer2,
                 action: () => {},
             },
             {
                 label: `Move`,
                 icon: Move3D,
-                action: () => {},
+                gizmoProperty: `translationIsVisible`,
+                action: () => {
+                    gizmoOptions.update((value) => ({
+                        ...value,
+                        translationIsVisible: !value.translationIsVisible,
+                    }));
+                },
             },
             {
                 label: `Scale`,
+                gizmoProperty: `scaleIsVisible`,
                 icon: ImageUpscale,
-                action: () => {},
+                action: () => {
+                    gizmoOptions.update((value) => ({
+                        ...value,
+                        scaleIsVisible: !value.scaleIsVisible,
+                    }));
+                },
             },
             {
                 label: `Rotate`,
+                gizmoProperty: `rotationIsVisible`,
                 icon: Rotate3D,
-                action: () => {},
+                action: () => {
+                    gizmoOptions.update((value) => console.log(!value.rotationIsVisible) ?? ({
+                        ...value,
+                        rotationIsVisible: !value.rotationIsVisible,
+                    }));
+                },
             },
         ],
         practicals: [
@@ -146,7 +177,23 @@ export let info = {
             {
                 label: `3D import`,
                 icon: Box,
-                action: () => {},
+                action: async () => {
+                    const path = await open({
+                        multiple: false,
+                        directory: false,
+                        filters: [{
+                            name: `Binary GLTF models`,
+                            extensions: [`glb`]
+                        }],
+                        title: `GLTF model import`,
+                    });
+
+                    if (!path) return;
+                    const file = await readFile(path);
+
+                    console.log(path, file);
+                    runner.loadModel(file);
+                },
             },
             {
                 label: `2D import`,
