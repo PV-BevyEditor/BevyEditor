@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code&:wght@300..700&family=Nova+Mono&family=JetBrains+Mono&display=swap');
+@import url('./themes.css');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

@@ -8,8 +8,9 @@ const bits = {
     rotationIsVisible: 0b0000_1000,
 };
 
-await __wbg_init().catch(console.log);
-export let runner = new Runner();
+export const init = () => __wbg_init().catch(console.log);
+export let runner: Runner;
+export const setRunner = () => runner = runner ?? new Runner();
 
 export const start = () => {
     try {

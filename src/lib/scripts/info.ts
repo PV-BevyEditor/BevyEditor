@@ -192,7 +192,7 @@ export let info = {
                     const file = await readFile(path);
 
                     console.log(path, file);
-                    runner.loadModel(file);
+                    runner?.loadModel(file);
                 },
             },
             {

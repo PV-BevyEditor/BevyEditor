@@ -86,7 +86,3 @@
 
     {@render children?.()}
 </main>
-
-<style>
-    @import url('https://fonts.googleapis.com/css2?family=Fira+Code&:wght@300..700&family=Nova+Mono&family=JetBrains+Mono&display=swap');
-</style>
