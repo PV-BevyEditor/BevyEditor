@@ -9,4 +9,4 @@
     });
 </script>
 
-<canvas id="game_canvas"></canvas>
+<canvas id="game_canvas" class="rounded-lg outline-none border border-[--color-primary-700] h-full w-full"></canvas>

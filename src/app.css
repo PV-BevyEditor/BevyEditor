@@ -1,6 +1,37 @@
 @import url('https://fonts.googleapis.com/css2?family=Fira+Code&:wght@300..700&family=Nova+Mono&family=JetBrains+Mono&display=swap');
 @import url('./themes.css');
 
+/* @import 'tailwindcss'; */
+@plugin 'flowbite/plugin';
+
+@custom-variant dark (&:where(.dark, .dark *))
+@theme {
+    --color-primary-50: #d4e6ff;
+    --color-primary-100: #a7cefe;
+    --color-primary-200: #83b8f9;
+    --color-primary-300: #57a1f9;
+    --color-primary-400: #2787f8;
+    --color-primary-500: #0770ef;
+    --color-primary-600: #0662d3;
+    --color-primary-700: #0052b4;
+    --color-primary-800: #064491;
+    --color-primary-900: #09366f;
+    --color-primary-950: #0b284f;
+}
+
+@source "../node_modules/flowbite-svelte/dist";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+input[type=number] {
+    -moz-appearance: textfield; /* Firefox */
+}
