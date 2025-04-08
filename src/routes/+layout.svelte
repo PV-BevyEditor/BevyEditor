@@ -46,11 +46,11 @@
                     <Tooltip.Root>
                         <Tooltip.Trigger>
                             <button onclick={action.action} class="flex flex-col justify-center">
-                                <Icon strokeWidth={1} color={action.colour} fill={action.colour} class="h-4 w-4" />
+                                <Icon strokeWidth={2} color={action.colour} fill={action.fill ? action.colour : `#0000`} class="h-4 w-4" />
                             </button>
                         </Tooltip.Trigger>
                         <Tooltip.Content>
-                            <div class="text-xs rounded-lg border border-[--color-surface-700] shadow-[--color-surface-700] shadow-md bg-[--color-surface-950] px-1.5 py-0.5">
+                            <div class="text-xs rounded-lg border border-[--color-surface-700] shadow-[--color-surface-700] shadow-sm bg-[--color-surface-950] px-1.5 py-0.5">
                                 {action.tooltip}
                             </div>
                         </Tooltip.Content>

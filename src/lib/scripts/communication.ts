@@ -1,15 +1,18 @@
 import __wbg_init, { Runner } from "../webbuild/out/editorgame";
 import { gizmoOptions, type GizmoOptions } from "$lib/stores/gizmoOptions";
-import { Communication } from "./classes";
+import { Communication, HistoryList } from "./classes";
 
 // Things that need to be accessible from the bevy editorgame need to be passed into the window object
 declare global {
     interface Window {
         communication: ReturnType<typeof Communication>;
+        historyList: typeof HistoryList;
     }
 }
 export const initCommunication = () => {
     window.communication = Communication();
+    window.historyList = HistoryList;
+    
     return window.communication;
 };
 

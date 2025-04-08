@@ -15,6 +15,8 @@ import {
     MountainSnow,
     Box,
     Image,
+    Undo2,
+    Redo2,
 } from "lucide-svelte"
 import { gizmoOptions, type GizmoOptions } from "$lib/stores/gizmoOptions";
 
@@ -105,18 +107,35 @@ export let info = {
             icon: Play,
             colour: `green`,
             action: () => {},
+            fill: true,
         },
         {
             tooltip: `Pause`,
             icon: Pause,
             colour: `grey`,
             action: () => {},
+            fill: true,
         },
         {
             tooltip: `Stop`,
             icon: Octagon,
             colour: `red`,
             action: () => {},
+            fill: true,
+        },
+        {
+            tooltip: `Undo`,
+            icon: Undo2,
+            colour: `lightblue`,
+            action: () => {},
+            fill: false,
+        },
+        {
+            tooltip: `Redo`,
+            icon: Redo2,
+            colour: `lightblue`,
+            action: () => {},
+            fill: false,
         }
     ],
     toolbarActions: {

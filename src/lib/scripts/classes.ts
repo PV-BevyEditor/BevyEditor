@@ -29,3 +29,30 @@ export const Communication = (function() {
         }
     };
 });
+
+type HistoryItem = {
+    location: `editor` | `viewport`,
+    undoAction: () => void,
+    display: string,
+    type: `transformation` | `property`,
+};
+
+export const HistoryList = (function() {
+    let history: HistoryItem[] = [];
+    let future: HistoryItem[] = [];
+    let maxHistoryLength = 64;
+
+    return {
+        get: (amount: number = maxHistoryLength - 1) => history.slice(- amount),
+        add: (historyItem: HistoryItem) => {
+            history.push(historyItem)
+            future = [];
+        },
+        undo: (amount: number = 1) => {
+
+        },
+        redo: (amount: number = 1) => {
+
+        },
+    };
+})();
