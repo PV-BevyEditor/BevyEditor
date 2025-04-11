@@ -2,7 +2,16 @@
     import { DropdownItem } from "flowbite-svelte";
     import { type Vec3 } from "$lib/scripts/engineTypes";
     import PropertyPopover from "../propertyPopover.svelte";
-    let { value }: { value: Vec3 } = $props();
+    let { value, componentName, property }: { value: Vec3, componentName: string, property: string } = $props();
+
+    $effect(() => {
+        // Send value to viewport
+        window.runner.sendEvent("setProperty", JSON.stringify({
+            componentName,
+            property,
+            value
+        }));
+    });
 </script>
 
 <PropertyPopover triggerText={`${value.x}, ${value.y}, ${value.z}`}>

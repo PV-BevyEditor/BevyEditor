@@ -7,6 +7,7 @@ declare global {
     interface Window {
         communication: ReturnType<typeof Communication>;
         historyList: typeof HistoryList;
+        runner: Runner;
     }
 }
 export const initCommunication = () => {
@@ -27,7 +28,10 @@ const bits = {
 
 export const init = () => __wbg_init().catch(console.log);
 export let runner: Runner;
-export const setRunner = () => runner = runner ?? new Runner();
+export const setRunner = () => {
+    runner = runner ?? new Runner();
+    window.runner = runner;
+};
 export const start = () => {
     try {
         runner.startGame();

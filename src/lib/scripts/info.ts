@@ -127,14 +127,14 @@ export let info = {
             tooltip: `Undo`,
             icon: Undo2,
             colour: `lightblue`,
-            action: () => {},
+            action: () => runner?.sendEvent(`undo`),
             fill: false,
         },
         {
             tooltip: `Redo`,
             icon: Redo2,
             colour: `lightblue`,
-            action: () => {},
+            action: () => runner?.sendEvent(`redo`),
             fill: false,
         }
     ],

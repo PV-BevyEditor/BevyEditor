@@ -27,6 +27,7 @@ export class Runner {
   startGame(): void;
   setGizmoOptions(flags: number): void;
   loadModel(bytes: Uint8Array): void;
+  sendEvent(eventType: string): void;
 }
 
 export type InitInput = RequestInfo | URL | Response | BufferSource | WebAssembly.Module;
@@ -38,6 +39,7 @@ export interface InitOutput {
   readonly runner_startGame: (a: number) => void;
   readonly runner_setGizmoOptions: (a: number, b: number) => void;
   readonly runner_loadModel: (a: number, b: number, c: number) => void;
+  readonly runner_sendEvent: (a: number, b: number, c: number) => void;
   readonly main: (a: number, b: number) => number;
   readonly __externref_table_alloc: () => number;
   readonly __wbindgen_export_1: WebAssembly.Table;
@@ -47,10 +49,10 @@ export interface InitOutput {
   readonly __wbindgen_free: (a: number, b: number, c: number) => void;
   readonly __wbindgen_export_6: WebAssembly.Table;
   readonly _dyn_core__ops__function__FnMut_____Output___R_as_wasm_bindgen__closure__WasmClosure___describe__invoke__hccb541f76fd3f49a: (a: number, b: number) => void;
-  readonly closure61287_externref_shim: (a: number, b: number, c: any) => void;
-  readonly closure62574_externref_shim: (a: number, b: number, c: any, d: any) => void;
+  readonly closure61318_externref_shim: (a: number, b: number, c: any) => void;
+  readonly closure62605_externref_shim: (a: number, b: number, c: any, d: any) => void;
   readonly _dyn_core__ops__function__FnMut__A____Output___R_as_wasm_bindgen__closure__WasmClosure___describe__invoke__hb61636b5d895c4ef: (a: number, b: number, c: number) => void;
-  readonly closure62581_externref_shim: (a: number, b: number, c: any) => void;
+  readonly closure62612_externref_shim: (a: number, b: number, c: any) => void;
   readonly _dyn_core__ops__function__FnMut_____Output___R_as_wasm_bindgen__closure__WasmClosure___describe__invoke__h4dbde2d62e8e828e: (a: number, b: number) => void;
   readonly __wbindgen_start: () => void;
 }
