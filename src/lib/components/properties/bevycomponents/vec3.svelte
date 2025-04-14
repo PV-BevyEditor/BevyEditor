@@ -2,15 +2,17 @@
     import { DropdownItem } from "flowbite-svelte";
     import { type Vec3 } from "$lib/scripts/engineTypes";
     import PropertyPopover from "../propertyPopover.svelte";
-    let { value, componentName, property }: { value: Vec3, componentName: string, property: string } = $props();
+    let { value = $bindable(), componentName, property }: { value: Vec3, componentName: string, property: string } = $props();
 
     $effect(() => {
-        // Send value to viewport
-        window.runner.sendEvent("setProperty", JSON.stringify({
+        let info = {
             componentName,
             property,
-            value
-        }));
+            value,
+        };
+        console.log(`Running effect`, JSON.stringify(info));
+        // Send value to viewport
+        window.runner.sendEvent("setProperty", JSON.stringify(info));
     });
 </script>
 

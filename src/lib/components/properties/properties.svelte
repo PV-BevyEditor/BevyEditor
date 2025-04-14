@@ -16,7 +16,10 @@
         name: string;
         info: Record<string, BevyComponent>;
     }
-    communication.addCallback(`properties`, (data: ComponentProperties[]) => console.log(data) ?? (components = data));
+    communication.addCallback(`properties`, (data: ComponentProperties[]) => console.log(data) ?? (components = data.map((e) => ({
+        ...e,
+        name: e.name.split(`::`).pop()?.replaceAll(`>`, ``) ?? ``
+    }))));
 </script>
 
 <div class="flex flex-col p-1 border border-[--color-primary-700] rounded-lg gap-1">
@@ -25,15 +28,15 @@
     <Accordion>
         {#each components as component}
             <AccordionItem class="p-2">
-                <span slot="header" class="-my-5 mr-4">{component.name.split(`::`).pop()?.replaceAll(`>`, ``) ?? ``}</span>
+                <span slot="header" class="-my-5 mr-4">{component.name}</span>
 
                 <div class="-mx-5 -my-4 flex flex-col">
                     {#each Object.entries(component.info) as [property, value], index}
                         <div class="flex flex-row justify-between items-center mx-1">
                             <div class="text-sm mr-4">{property}</div>
 
-                            {#if isVec3(value)}
-                                <Vec3 {value} componentName={component.name} {property} />
+                            {#if isVec3(component.info[property])}
+                                <Vec3 bind:value={component.info[property]} componentName={component.name} {property} />
                             {:else if isQuat(value)}
                                 <Quat {value} />
                             {:else if isVisibilityValue(value)}
